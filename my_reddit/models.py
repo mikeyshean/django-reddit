@@ -24,7 +24,7 @@ class Sub(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=50)
     author = models.ForeignKey(User)
-    sub = models.ForeignKey(Sub)
+    sub = models.ForeignKey(Sub, related_name='posts', related_query_name='post')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
