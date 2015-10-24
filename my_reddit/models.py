@@ -30,3 +30,11 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+class Comment(models.Model):
+    comment_text = models.CharField(max_length=2500)
+    author = models.ForeignKey(User)
+    parent = models.ForeignKey('self')
+    post = models.ForeignKey(Post)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
