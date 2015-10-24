@@ -17,5 +17,6 @@ from django.conf.urls import include, url
 from django.contrib import admin
 
 urlpatterns = [
+    url(r'^r/', include('my_reddit.urls', namespace='my_reddit')),
     url(r'^admin/', include(admin.site.urls)),
 ]
