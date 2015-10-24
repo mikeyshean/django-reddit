@@ -1,13 +1,13 @@
 <h1>{{ post.title }}</h1>
 
 <p>
-  {{ post.description }}
+  {{ post.text }}
 </p>
 
 {% include 'my_reddit/partials/comment_form.html' %}
 
 <ul>
   {% for comment in post.comments.all %}
-    <li>{{ comment.comment_text }}</li>
+    <li>{{ comment.comment_text }} -- {{ comment.author.name }}</li>
   {% endfor %}
 </ul>

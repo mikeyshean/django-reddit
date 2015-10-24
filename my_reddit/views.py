@@ -13,7 +13,6 @@ class IndexView(generic.ListView):
 
 class SubView(generic.DetailView):
     template_name = 'my_reddit/sub_show.html'
-    model = Sub
 
     def get_queryset(self):
         return Sub.objects.prefetch_related("posts__author")
