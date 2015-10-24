@@ -2,6 +2,6 @@
 
 <ul>
   {% for sub in subs_list%}
-      <li>{{ sub.name }}</li>
+      <li><a href="{% url 'my_reddit:sub' sub.id %}">{{ sub.name }}</a></li>
   {% endfor %}
 </ul>
