@@ -15,3 +15,7 @@ class SubView(generic.DetailView):
 
     def get_queryset(self):
         return Sub.objects.prefetch_related("posts__author")
+
+def post_view(request, sub_id, post_id):
+    post = Post.objects.prefetch_related("comments__author").get(pk=post_id)
+    return render(request, 'my_reddit/post_show.html', { 'post': post })
