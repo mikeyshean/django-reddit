@@ -1,1 +1,7 @@
-<h1>Index!</h1>
+<h1>Frontpage</h1>
+
+<ul>
+  {% for sub in subs_list%}
+      <li>{{ sub.name }}</li>
+  {% endfor %}
+</ul>
