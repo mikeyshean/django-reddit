@@ -34,7 +34,7 @@ class Post(models.Model):
 class Comment(models.Model):
     comment_text = models.CharField(max_length=2500)
     author = models.ForeignKey(User)
-    parent = models.ForeignKey('self')
+    parent = models.ForeignKey('self', default=None, null=True)
     post = models.ForeignKey(Post, related_name='comments')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
