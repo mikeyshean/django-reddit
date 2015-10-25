@@ -1,7 +1,9 @@
 <h4>Add Comment</h2>
 
   {% if parent %}
-    <form class="comment_form" action="{% url 'my_reddit:parent_comment' post.sub_id post.id %}" method="post">
+    <form class="comment_form"
+          action="{% url 'my_reddit:parent_comment' post.sub_id post.id %}"
+          method="post">
   {% else %}
     <form class="comment_form" action="{% url 'my_reddit:comment' comment.id %}" method="post">
   {% endif %}

@@ -40,6 +40,16 @@ class CommentView(generic.DetailView):
 
 
 def post_view(request, sub_id, post_id):
+    ## Work on pre-fetching nested comments:
+    
+    # top_level_comments = Comment.objects.filter(parent_id=null)
+    # post = Post.objects.prefetch_related(
+    #     Prefetch(
+    #         "comments__author",
+    #         queryset=top_level_comments,
+    #         to_attr='top_comments'
+    #     )).get(pk=post_id)
+
     post = Post.objects.prefetch_related("comments__author").get(pk=post_id)
     return render(request, 'my_reddit/post_show.html', { 'post': post })
 

@@ -10,10 +10,9 @@
 {% include 'my_reddit/partials/comment_form.html' with parent=True %}
 
 <ul>
-  {% for comment in post.comments.all %}
+  {% for comment in post.top_level_comments %}
     <li>
-      {{ comment.comment_text }} -- {{ comment.author.name }}
-      <a href="{% url 'my_reddit:comment' comment.id %}">Reply</a>
+      {% include 'my_reddit/partials/comment.html' %}
     </li>
   {% endfor %}
 </ul>

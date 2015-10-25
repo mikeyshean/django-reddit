@@ -1,0 +1,10 @@
+{{ comment.comment_text }} -- {{ comment.author.name }}
+<a href="{% url 'my_reddit:comment' comment.id %}">Reply</a>
+
+{% if comment.child_comments.all.exists %}
+  <ul>
+    {% for comment in comment.child_comments.all %}
+      <li>{% include 'my_reddit/partials/comment.html' %}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
