@@ -21,7 +21,12 @@ class CommentView(generic.DetailView):
 
     def get(self, request, *args, **kwargs):
         comment = Comment.objects.get(pk=kwargs['pk'])
-        return render(request, 'my_reddit/comment.html', { 'comment': comment })
+        post = comment.post
+        return render(
+            request,
+            'my_reddit/comment.html',
+            { 'comment': comment, 'post': post }
+        )
 
     def post(self, request, *args, **kwargs):
         parent = get_object_or_404(Comment, pk=kwargs['pk'])
