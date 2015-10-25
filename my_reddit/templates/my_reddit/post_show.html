@@ -1,16 +1,19 @@
 
 {% include 'my_reddit/partials/nav.html' %}
 
-<h1>{{ post.title }}</h1>
+<h3>{{ post.title }}</h3>
 
 <p>
   {{ post.text }}
 </p>
 
-{% include 'my_reddit/partials/comment_form.html' %}
+{% include 'my_reddit/partials/comment_form.html' with parent=True %}
 
 <ul>
   {% for comment in post.comments.all %}
-    <li>{{ comment.comment_text }} -- {{ comment.author.name }}</li>
+    <li>
+      {{ comment.comment_text }} -- {{ comment.author.name }}
+      <a href="{% url 'my_reddit:comment' comment.id %}">Reply</a>
+    </li>
   {% endfor %}
 </ul>
