@@ -1,3 +1,5 @@
+{% include 'my_reddit/partials/assets.html' %}
+
 <h3><a href="{% url 'my_reddit:post' post.sub_id post.id %}">{{ post.title }}</a></h3>
 <h3>{{ comment.comment_text }}</h3>
 

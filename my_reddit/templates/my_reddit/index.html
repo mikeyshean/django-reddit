@@ -2,6 +2,8 @@
 
 <h1>Subs</h1>
 
+<a href="{% url 'my_reddit:new_sub' %}">Add New Sub</a>
+
 <ul>
   {% for sub in subs_list%}
       <li><a href="{% url 'my_reddit:sub' sub.id %}">{{ sub.name }}</a></li>
