@@ -1,0 +1,15 @@
+{% include 'my_reddit/partials/assets.html' %}
+<h1>Add New Post</h1>
+
+<form class="new_post_form" action="{% url 'my_reddit:sub' sub_id %}" method="post">
+  {% csrf_token %}
+  <label for="post_title">Post Title:</label>
+  <input type="text" name="title" id="post_title" value=""><br>
+
+  <label for="post_text">Description:</label>
+  <input type="text" name="text" id="post_text" value=""><br>
+
+  <input type="hidden" name="sub_id" value="{{ sub_id }}">
+
+  <input type="submit" value="Create Post">
+</form>
