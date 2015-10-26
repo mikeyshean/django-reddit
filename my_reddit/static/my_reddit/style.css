@@ -1,0 +1,41 @@
+html, body, h1, ul, li, button, a, p  {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  outline: 0;
+
+  box-sizing: inherit;
+  font: inherit;
+  color: inherit;
+  text-align: inherit;
+  text-decoration: inherit;
+  background: transparent;
+}
+
+ul {
+  list-style: none;
+}
+
+ul ul {
+  padding-left: 40px;
+}
+
+body {
+  background: #1C1F24;
+  font-family: "Roboto", sans-serif;
+  color: #fff;
+}
+
+h1 {
+  font-size: 36px;
+  font-weight: 700;
+}
+
+a {
+  color: #f50;
+}
+
+a:hover {
+  font-weight: 700;
+  letter-spacing: .3;
+}
