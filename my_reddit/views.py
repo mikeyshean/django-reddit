@@ -55,8 +55,12 @@ def post_view(request, sub_id, post_id):
     #         to_attr='top_comments'
     #     )).get(pk=post_id)
 
+    post = get_object_or_404(Post, pk=post_id)
+    comments = post.comments_by_parent_id()
+    print comments
+
     post = Post.objects.prefetch_related("comments__author").get(pk=post_id)
-    return render(request, 'my_reddit/post_show.html', { 'post': post })
+    return render(request, 'my_reddit/post_show.html', { 'post': post, 'comments': comments })
 
 class CommentView(generic.DetailView):
 
@@ -71,13 +75,13 @@ class CommentView(generic.DetailView):
 
     def post(self, request, *args, **kwargs):
         parent = get_object_or_404(Comment, pk=kwargs['pk'])
-        parent.child_comments.create(
+        new_comment = parent.child_comments.create(
             comment_text=request.POST['comment_text'],
             author_id=1,
             post_id=parent.post_id
         )
 
-        return HttpResponseRedirect(reverse('my_reddit:comment', args=(parent.id,)))
+        return HttpResponseRedirect(reverse('my_reddit:comment', args=(new_comment.id,)))
 
 
 def parent_comment(request, sub_id, post_id):

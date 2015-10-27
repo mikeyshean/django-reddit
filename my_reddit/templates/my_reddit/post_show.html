@@ -1,6 +1,7 @@
 
 {% include 'my_reddit/partials/assets.html' %}
 {% include 'my_reddit/partials/nav.html' %}
+{% load dict_extras %}
 
 <h3>{{ post.title }}</h3>
 
@@ -11,9 +12,9 @@
 {% include 'my_reddit/partials/comment_form.html' with parent=True %}
 
 <ul>
-  {% for comment in post.top_level_comments %}
+  {% for comment in comments|get_values:None %}
     <li>
-      {% include 'my_reddit/partials/comment.html' %}
+      {% include 'my_reddit/partials/comment.html' with comments=comments %}
     </li>
   {% endfor %}
 </ul>

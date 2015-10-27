@@ -1,4 +1,5 @@
 from django.db import models
+from collections import defaultdict
 
 class User(models.Model):
     name = models.CharField(max_length=25)
@@ -32,8 +33,15 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
-    def top_level_comments(self):
-        return self.comments.filter(parent_id__isnull=True)
+    def comments_by_parent_id(self):
+        result = {}
+        result = defaultdict(lambda:[], result)
+
+        for comment in self.comments.all():
+            result[comment.parent_id].append(comment)
+
+        return dict(result)
+
 
 class Comment(models.Model):
     comment_text = models.CharField(max_length=2500)
