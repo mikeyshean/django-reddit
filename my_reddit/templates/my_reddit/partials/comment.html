@@ -1,6 +1,15 @@
 {% load dict_extras %}
 
 {{ votes }} -- {{ comment.comment_text }} -- {{ comment.author.name }}
+<form class="vote_form" action="{% url 'my_reddit:comment_vote' comment.id 'upvote' %}" method="post">
+  {% csrf_token %}
+  <button type="submit" name="button">Upvote</button>
+</form>
+<form class="vote_form" action="{% url 'my_reddit:comment_vote' comment.id 'downvote' %}" method="post">
+  {% csrf_token %}
+  <button type="submit" name="button">Downvote</button>
+</form>
+
 <a href="{% url 'my_reddit:comment' comment.id %}">Reply</a>
 
 {% if comments|get_values:comment.id %}

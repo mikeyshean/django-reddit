@@ -19,7 +19,6 @@ class IndexView(generic.ListView):
         return HttpResponseRedirect(reverse('my_reddit:sub', args=(sub.id,)))
 
 def new_sub(request):
-    print "SUB"
     return render(request, 'my_reddit/new_sub.html')
 
 class SubView(generic.DetailView):
@@ -45,14 +44,25 @@ class SubView(generic.DetailView):
         return HttpResponseRedirect(reverse('my_reddit:post', args=(sub_id,post.id)))
 
 def new_post(request, sub_id):
-    print "YOLO"
     return render(request, 'my_reddit/new_post.html', { 'sub_id': sub_id })
 
 def post_view(request, sub_id, post_id):
     post = get_object_or_404(Post, pk=post_id)
     comments = post.comments_by_parent_id()
-    print comments
     return render(request, 'my_reddit/post_show.html', { 'post': post, 'comments': comments })
+
+def comment_vote(request, comment_id, type):
+    comment = get_object_or_404(Comment, pk=comment_id)
+    if type == 'upvote':
+        comment.votes.create(amount=1)
+    elif type =='downvote':
+        comment.votes.create(amount=-1)
+    post = comment.post
+    return HttpResponseRedirect(reverse('my_reddit:post', args=(post.sub_id, post.id)))
+
+def post_vote(request, sub_id, post_id):
+    post = get_object_or_404(Post, pk=post_id)
+    
 
 class CommentView(generic.DetailView):
 
