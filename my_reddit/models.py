@@ -1,34 +1,37 @@
 from django.db import models
 from collections import defaultdict
 
-class User(models.Model):
-    name = models.CharField(max_length=25)
-    password = models.CharField(max_length=50)
+
+class TimestampsModel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        abstract = True
+
+
+class User(TimestampsModel):
+    name = models.CharField(max_length=25)
+    password = models.CharField(max_length=50)
 
     def __str__(self):
         return self.name
 
 
-class Sub(models.Model):
+class Sub(TimestampsModel):
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=150)
     creator = models.ForeignKey(User)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name
 
 
-class Post(models.Model):
+class Post(TimestampsModel):
     title = models.CharField(max_length=50)
     text = models.CharField(max_length=2000)
     author = models.ForeignKey(User)
     sub = models.ForeignKey(Sub, related_name='posts', related_query_name='post')
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.title
@@ -43,13 +46,11 @@ class Post(models.Model):
         return dict(result)
 
 
-class Comment(models.Model):
+class Comment(TimestampsModel):
     comment_text = models.CharField(max_length=2500)
     author = models.ForeignKey(User)
     parent = models.ForeignKey('self', default=None, null=True, related_name='child_comments')
     post = models.ForeignKey(Post, related_name='comments')
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.comment_text
