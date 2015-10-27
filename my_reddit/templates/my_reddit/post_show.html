@@ -11,9 +11,9 @@
 
 {% include 'my_reddit/partials/comment_form.html' with parent=True %}
 
-<ul>
+<ul class="main-list">
   {% for comment_dict in comments|get_values:None %}
-    <li>
+    <li class="main-list-item">
       {% include 'my_reddit/partials/comment.html' with comments=comments comment=comment_dict.comment votes=comment_dict.vote_count %}
     </li>
   {% endfor %}

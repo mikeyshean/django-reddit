@@ -4,8 +4,8 @@
 
 <a href="{% url 'my_reddit:new_sub' %}">Add New Sub</a>
 
-<ul>
+<ul class='main-list'>
   {% for sub in subs_list%}
-      <li><a href="{% url 'my_reddit:sub' sub.id %}">{{ sub.name }}</a></li>
+      <li class='main-list-item'><a href="{% url 'my_reddit:sub' sub.id %}">{{ sub.name }}</a></li>
   {% endfor %}
 </ul>

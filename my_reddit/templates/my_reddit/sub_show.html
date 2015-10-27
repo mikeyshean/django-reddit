@@ -1,20 +1,24 @@
 {% include 'my_reddit/partials/assets.html' %}
 {% include 'my_reddit/partials/nav.html' %}
-<h2>{{ sub.name }}</h2>
+<h1>{{ sub.name }}</h1>
 <a href="{% url 'my_reddit:new_post' sub.id %}">Create New Post</a>
-<ul>
+<ul class='main-list'>
   {% for post in posts %}
-      <li>
-        {{ post.vote_count }}
-        <form class="vote_form" action="{% url 'my_reddit:post_vote' post.post.sub_id post.post.id 'upvote' %}" method="post">
-          {% csrf_token %}
-          <button type="submit" name="button">Upvote</button>
-        </form>
-        <form class="vote_form" action="{% url 'my_reddit:post_vote' post.post.sub_id post.post.id 'downvote' %}" method="post">
-          {% csrf_token %}
-          <button type="submit" name="button">Downvote</button>
-        </form>
-        <a href="{% url 'my_reddit:post' sub.id post.post.id %}">{{ post.post.title }}</a>  --  {{ post.post.author.name }}
+      <li class='main-list-item vote-item group'>
+        <div class="vote-buttons">
+          <form class="vote-form" action="{% url 'my_reddit:post_vote' post.post.sub_id post.post.id 'upvote' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" name="button">&#x25B2;</button>
+          </form>
+          <span>{{ post.vote_count }}</span>
+          <form class="vote-form downvote" action="{% url 'my_reddit:post_vote' post.post.sub_id post.post.id 'downvote' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" name="button">&#x25B2;</button>
+          </form>
+        </div>
+        <div class="list-content">
+          <a href="{% url 'my_reddit:post' sub.id post.post.id %}" class="list-content-title">{{ post.post.title }}</a><br> submitted by {{ post.post.author.name }}
+        </div>
       </li>
   {% endfor %}
 </ul>

@@ -1,4 +1,4 @@
-html, body, h1, h2, ul, li, button, a, p  {
+html, body, h1, h2, ul, li, button, a, p, form  {
   border: 0;
   padding: 0;
   margin: 0;
@@ -43,4 +43,65 @@ a {
 
 a:hover {
   text-decoration: underline;
+}
+
+.group:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.main-list-item {
+  border: 1px solid #f50;
+  border-top: none;
+  padding: 10px;
+  position: relative;
+}
+
+.main-list-item .list-content {
+  position: absolute;
+  margin-left: 50px;
+  top: 50%;
+  transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+}
+
+.list-content > .list-content-title {
+  font-size: 24px;
+}
+
+.main-list > li:first-child {
+  border-top: 1px solid #f50;
+}
+
+.main-list {
+  margin-top: 20px;
+}
+
+.vote-item > * {
+  float: left;
+}
+
+.vote-buttons {
+  text-align: center;
+}
+
+.vote-form > button {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.vote-form.downvote > button {
+  transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+}
+
+.vote-form > button:hover {
+  color: #f50;
+}
+
+.vote-buttons > * {
+  display: block;
 }
