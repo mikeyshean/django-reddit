@@ -33,6 +33,7 @@ class Sub(TimestampsModel):
 
         for post in self.posts.all():
             post_details = {'post': post}
+            ## Posts/Votes Prefetched from SubView
             vote_count = post.vote_count()['vote_count']
 
             if vote_count is not None:

@@ -54,7 +54,11 @@ def post_view(request, sub_id, post_id):
     post = get_object_or_404(Post, pk=post_id)
     comments_dict = post.comments_by_parent_id()
 
-    return render(request, 'my_reddit/post_show.html', { 'post': post, 'comments': comments_dict })
+    return render(
+        request,
+        'my_reddit/post_show.html',
+        { 'post': post, 'comments': comments_dict }
+    )
 
 def comment_vote(request, comment_id, type):
     comment = get_object_or_404(Comment, pk=comment_id)
@@ -65,7 +69,9 @@ def comment_vote(request, comment_id, type):
         comment.votes.create(amount=-1)
     post = comment.post
 
-    return HttpResponseRedirect(reverse('my_reddit:post', args=(post.sub_id, post.id)))
+    return HttpResponseRedirect(
+        reverse('my_reddit:post', args=(post.sub_id, post.id))
+    )
 
 def post_vote(request, sub_id, post_id, type):
     post = get_object_or_404(Post, pk=post_id)
@@ -74,7 +80,9 @@ def post_vote(request, sub_id, post_id, type):
     elif type =='downvote':
         post.votes.create(amount=-1)
 
-    return HttpResponseRedirect(reverse('my_reddit:sub', args=(post.sub_id,)))
+    return HttpResponseRedirect(
+        reverse('my_reddit:sub', args=(post.sub_id,))
+    )
 
 
 class CommentView(generic.DetailView):
@@ -97,7 +105,9 @@ class CommentView(generic.DetailView):
             post_id=parent.post_id
         )
 
-        return HttpResponseRedirect(reverse('my_reddit:comment', args=(new_comment.id,)))
+        return HttpResponseRedirect(
+            reverse('my_reddit:comment', args=(new_comment.id,))
+        )
 
 
 def parent_comment(request, sub_id, post_id):
@@ -107,4 +117,6 @@ def parent_comment(request, sub_id, post_id):
         author_id=1
     )
 
-    return HttpResponseRedirect(reverse('my_reddit:post', args=(sub_id,post_id)))
+    return HttpResponseRedirect(
+        reverse('my_reddit:post', args=(sub_id,post_id))
+    )
