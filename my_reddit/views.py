@@ -10,12 +10,14 @@ class IndexView(generic.ListView):
     def get(self, request):
         template_name = 'my_reddit/index.html'
         subs_list = Sub.objects.order_by('name')
+
         return render(request, template_name, { 'subs_list': subs_list })
 
     def post(self, request):
         name = request.POST['name']
         description = request.POST['description']
         sub = Sub.objects.create(name=name, description=description, creator_id=1)
+
         return HttpResponseRedirect(reverse('my_reddit:sub', args=(sub.id,)))
 
 def new_sub(request):
@@ -33,7 +35,9 @@ class SubView(generic.DetailView):
             ), pk=kwargs['pk']
         )
 
-        return render(request, template_name, { 'sub': sub })
+        post_details = sub.posts_with_votes()
+
+        return render(request, template_name, { 'sub': sub, 'posts': post_details })
 
     def post(self, request, *args, **kwargs):
         title = request.POST['title']
@@ -48,27 +52,37 @@ def new_post(request, sub_id):
 
 def post_view(request, sub_id, post_id):
     post = get_object_or_404(Post, pk=post_id)
-    comments = post.comments_by_parent_id()
-    return render(request, 'my_reddit/post_show.html', { 'post': post, 'comments': comments })
+    comments_dict = post.comments_by_parent_id()
+
+    return render(request, 'my_reddit/post_show.html', { 'post': post, 'comments': comments_dict })
 
 def comment_vote(request, comment_id, type):
     comment = get_object_or_404(Comment, pk=comment_id)
+
     if type == 'upvote':
         comment.votes.create(amount=1)
     elif type =='downvote':
         comment.votes.create(amount=-1)
     post = comment.post
+
     return HttpResponseRedirect(reverse('my_reddit:post', args=(post.sub_id, post.id)))
 
-def post_vote(request, sub_id, post_id):
+def post_vote(request, sub_id, post_id, type):
     post = get_object_or_404(Post, pk=post_id)
-    
+    if type == 'upvote':
+        post.votes.create(amount=1)
+    elif type =='downvote':
+        post.votes.create(amount=-1)
+
+    return HttpResponseRedirect(reverse('my_reddit:sub', args=(post.sub_id,)))
+
 
 class CommentView(generic.DetailView):
 
     def get(self, request, *args, **kwargs):
         comment = Comment.objects.get(pk=kwargs['pk'])
         post = comment.post
+
         return render(
             request,
             'my_reddit/comment.html',

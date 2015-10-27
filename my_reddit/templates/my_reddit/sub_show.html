@@ -3,7 +3,18 @@
 <h2>{{ sub.name }}</h2>
 <a href="{% url 'my_reddit:new_post' sub.id %}">Create New Post</a>
 <ul>
-  {% for post in sub.posts.all %}
-      <li><a href="{% url 'my_reddit:post' sub.id post.id %}">{{ post.title }}</a>  --  {{ post.author.name }}</li>
+  {% for post in posts %}
+      <li>
+        {{ post.vote_count }}
+        <form class="vote_form" action="{% url 'my_reddit:post_vote' post.post.sub_id post.post.id 'upvote' %}" method="post">
+          {% csrf_token %}
+          <button type="submit" name="button">Upvote</button>
+        </form>
+        <form class="vote_form" action="{% url 'my_reddit:post_vote' post.post.sub_id post.post.id 'downvote' %}" method="post">
+          {% csrf_token %}
+          <button type="submit" name="button">Downvote</button>
+        </form>
+        <a href="{% url 'my_reddit:post' sub.id post.post.id %}">{{ post.post.title }}</a>  --  {{ post.post.author.name }}
+      </li>
   {% endfor %}
 </ul>

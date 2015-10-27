@@ -28,6 +28,22 @@ class Sub(TimestampsModel):
     def __str__(self):
         return self.name
 
+    def posts_with_votes(self):
+        result = []
+
+        for post in self.posts.all():
+            post_details = {'post': post}
+            vote_count = post.vote_count()['vote_count']
+
+            if vote_count is not None:
+                post_details['vote_count'] = vote_count
+            else:
+                post_details['vote_count'] = 0
+
+            result.append(post_details)
+
+        return result
+
 class Vote(TimestampsModel):
     amount = models.SmallIntegerField()
     content_type = models.ForeignKey(ContentType)
@@ -58,7 +74,7 @@ class Post(TimestampsModel):
                 comment_details['vote_count'] = 0
 
             result[comment.parent_id].append(comment_details)
-    
+
         return dict(result)
 
     def vote_count(self):
