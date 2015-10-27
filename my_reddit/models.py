@@ -37,7 +37,7 @@ class Post(models.Model):
         result = {}
         result = defaultdict(lambda:[], result)
 
-        for comment in self.comments.all():
+        for comment in self.comments.all().prefetch_related("author"):
             result[comment.parent_id].append(comment)
 
         return dict(result)
