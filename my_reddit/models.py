@@ -14,6 +14,7 @@ class TimestampsModel(models.Model):
 
 class User(TimestampsModel):
     name = models.CharField(max_length=25)
+    # Plaintext until auth is implemented =X
     password = models.CharField(max_length=50)
 
     def __str__(self):
