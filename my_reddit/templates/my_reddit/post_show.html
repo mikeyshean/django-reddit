@@ -12,9 +12,9 @@
 {% include 'my_reddit/partials/comment_form.html' with parent=True %}
 
 <ul>
-  {% for comment in comments|get_values:None %}
+  {% for comment_dict in comments|get_values:None %}
     <li>
-      {% include 'my_reddit/partials/comment.html' with comments=comments %}
+      {% include 'my_reddit/partials/comment.html' with comments=comments comment=comment_dict.comment votes=comment_dict.vote_count %}
     </li>
   {% endfor %}
 </ul>

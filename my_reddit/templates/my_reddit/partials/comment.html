@@ -1,12 +1,12 @@
 {% load dict_extras %}
 
-{{ comment.comment_text }} -- {{ comment.author.name }}
+{{ votes }} -- {{ comment.comment_text }} -- {{ comment.author.name }}
 <a href="{% url 'my_reddit:comment' comment.id %}">Reply</a>
 
 {% if comments|get_values:comment.id %}
   <ul>
-    {% for comment in comments|get_values:comment.id %}
-      <li>{% include 'my_reddit/partials/comment.html' with comments=comments %}</li>
+    {% for comment_dict in comments|get_values:comment.id %}
+      <li>{% include 'my_reddit/partials/comment.html' with comments=comments comment=comment_dict.comment votes=comment_dict.vote_count%}</li>
     {% endfor %}
   </ul>
 {% endif %}

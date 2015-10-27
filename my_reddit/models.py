@@ -1,5 +1,6 @@
 from django.db import models
 from collections import defaultdict
+from django.db.models import Sum
 from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 from django.contrib.contenttypes.models import ContentType
 
@@ -47,10 +48,21 @@ class Post(TimestampsModel):
         result = {}
         result = defaultdict(lambda:[], result)
 
-        for comment in self.comments.all().prefetch_related("author"):
-            result[comment.parent_id].append(comment)
+        for comment in self.comments.all().prefetch_related("author", "votes"):
+            comment_details = {'comment': comment}
+            vote_count = comment.vote_count()['vote_count']
 
+            if vote_count is not None:
+                comment_details['vote_count'] = vote_count
+            else:
+                comment_details['vote_count'] = 0
+
+            result[comment.parent_id].append(comment_details)
+    
         return dict(result)
+
+    def vote_count(self):
+        return self.votes.aggregate(vote_count=Sum('amount'))
 
 
 class Comment(TimestampsModel):
@@ -62,3 +74,6 @@ class Comment(TimestampsModel):
 
     def __str__(self):
         return self.comment_text
+
+    def vote_count(self):
+        return self.votes.aggregate(vote_count=Sum('amount'))

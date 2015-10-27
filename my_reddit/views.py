@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.views import generic
 from .models import User, Sub, Post, Comment
+from django.db.models import Prefetch
 
 class IndexView(generic.ListView):
 
@@ -26,8 +27,11 @@ class SubView(generic.DetailView):
     def get(self, request, *args, **kwargs):
         template_name = 'my_reddit/sub_show.html'
         sub = get_object_or_404(
-            Sub.objects.prefetch_related("posts__author"),
-            pk=kwargs['pk']
+            Sub.objects.prefetch_related(
+                Prefetch('posts', to_attr='sub_posts'),
+                'sub_posts__votes',
+                'sub_posts__author'
+            ), pk=kwargs['pk']
         )
 
         return render(request, template_name, { 'sub': sub })
@@ -47,7 +51,7 @@ def new_post(request, sub_id):
 def post_view(request, sub_id, post_id):
     post = get_object_or_404(Post, pk=post_id)
     comments = post.comments_by_parent_id()
-
+    print comments
     return render(request, 'my_reddit/post_show.html', { 'post': post, 'comments': comments })
 
 class CommentView(generic.DetailView):
