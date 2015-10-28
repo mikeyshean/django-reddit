@@ -16,10 +16,12 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from tastypie.api import Api
-from my_reddit.api.resources import SubResource
+from my_reddit.api.resources import SubResource, PostResource, CommentResource
 
 v1_api = Api(api_name='v1')
 v1_api.register(SubResource())
+v1_api.register(PostResource())
+v1_api.register(CommentResource())
 
 urlpatterns = [
     url(r'^r/', include('my_reddit.urls', namespace='my_reddit')),
