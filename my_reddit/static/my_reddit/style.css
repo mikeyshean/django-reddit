@@ -17,7 +17,8 @@ ul {
 }
 
 ul ul {
-  padding-left: 40px;
+  padding-left: 35px;
+  clear: both;
 }
 
 body {
@@ -51,6 +52,10 @@ a:hover {
   clear: both;
 }
 
+.left {
+  float: left;
+}
+
 .main-list-item {
   border: 1px solid #f50;
   border-top: none;
@@ -76,15 +81,7 @@ a:hover {
 }
 
 .main-list {
-  margin-top: 20px;
-}
-
-.vote-item > * {
-  float: left;
-}
-
-.vote-buttons {
-  text-align: center;
+  margin: 10px 0;
 }
 
 .vote-form > button {
@@ -102,6 +99,34 @@ a:hover {
   color: #f50;
 }
 
-.vote-buttons > * {
-  display: block;
+.vote-buttons {
+  text-align: center;
+}
+
+/* Comment Styles */
+
+.comment-separator {
+  clear: both;
+}
+
+.comment-content {
+  margin-left: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .4;
+}
+
+.comment-content .comment-text {
+  font-size: 14px;
+  font-weight: 300;
+  margin: 10px 0;
+}
+
+.comment-item {
+  padding: 5px;
+  overflow: hidden;
+}
+
+.comment-item button {
+  font-size: 16px;
 }

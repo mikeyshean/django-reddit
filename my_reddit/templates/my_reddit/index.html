@@ -6,6 +6,6 @@
 
 <ul class='main-list'>
   {% for sub in subs_list%}
-      <li class='main-list-item'><a href="{% url 'my_reddit:sub' sub.id %}">{{ sub.name }}</a></li>
+      <li class='main-list-item group'><a href="{% url 'my_reddit:sub' sub.id %}">{{ sub.name }}</a></li>
   {% endfor %}
 </ul>

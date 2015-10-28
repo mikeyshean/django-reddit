@@ -2,10 +2,10 @@
 {% include 'my_reddit/partials/nav.html' %}
 <h1>{{ sub.name }}</h1>
 <a href="{% url 'my_reddit:new_post' sub.id %}">Create New Post</a>
-<ul class='main-list'>
+<ul class="main-list">
   {% for post in posts %}
-      <li class='main-list-item vote-item group'>
-        <div class="vote-buttons">
+      <li class="main-list-item vote-item group">
+        <div class="vote-buttons left">
           <form class="vote-form" action="{% url 'my_reddit:post_vote' post.post.sub_id post.post.id 'upvote' %}" method="post">
             {% csrf_token %}
             <button type="submit" name="button">&#x25B2;</button>
