@@ -1,1 +1,7 @@
-<a href="{% url 'my_reddit:index' %}">Home</a>
+<a href="{% url 'my_reddit:index' %}">Home</a><br>
+
+{% if nav_sub %}
+
+<a href="{% url 'my_reddit:sub' nav_sub.id %}">Back to {{ nav_sub.name }}</a>
+
+{% endif %}

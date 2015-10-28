@@ -51,13 +51,13 @@ def new_post(request, sub_id):
     return render(request, 'my_reddit/new_post.html', { 'sub_id': sub_id })
 
 def post_view(request, sub_id, post_id):
-    post = get_object_or_404(Post, pk=post_id)
+    post = get_object_or_404(Post.objects.select_related("sub"), pk=post_id)
     comments_dict = post.comments_by_parent_id()
 
     return render(
         request,
         'my_reddit/post_show.html',
-        { 'post': post, 'comments': comments_dict }
+        { 'post': post, 'comments': comments_dict, 'nav_sub': post.sub }
     )
 
 def comment_vote(request, comment_id, type):
