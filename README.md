@@ -2,12 +2,27 @@
 
 \* *Work in Progress* \*
 
-*MyReddit* is an exercise in Python/Django web development
+*MyReddit* is an exercise in Django/Backbone web development
 
 <!-- [trackstack.audio][heroku] -->
 
 [heroku]: http://trackstack.audio
 
+### Languages:
+
+- Python
+- Javascript
+- HTML / CSS
+
+### Frameworks:
+
+- Django
+- Backbone.js
+
+### Libraries & Technologies:
+- jQuery
+- Underscore
+- TastyPie (RESTful APIs)
 
 ## Minimum Viable Product
 
@@ -17,7 +32,7 @@
 - [ ] Create sessions (log in)
 - [x] Create Subs/Posts/Comments
 - [ ] Edit Posts/Comments
-- [x] Upvote/Downvote Posts and Comments
+- [x] Polymorphic Votes on Posts and Comments
 - [x] Nested Commenting/Replies
 
 <!-- ## Design Docs
