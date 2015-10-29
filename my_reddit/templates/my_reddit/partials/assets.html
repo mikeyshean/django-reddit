@@ -5,3 +5,13 @@
 <script src="{% static 'js/underscore-min.js' %}"></script>
 <script src="{% static 'js/jquery-214-min.js' %}"></script>
 <script src="{% static 'js/backbone-min.js' %}"></script>
+<script src="{% static 'js/backbone-tastypie.js' %}"></script>
+<script src="{% static 'js/my_reddit.js' %}"></script>
+<script src="{% static 'js/models/sub.js' %}"></script>
+<script src="{% static 'js/collections/subs.js' %}"></script>
+
+<script>
+  $(document).ready(function(){
+    MyReddit.initialize();
+  });
+</script>
