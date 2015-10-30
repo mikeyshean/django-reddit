@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'my_reddit',
     'tastypie',
     'backbone_tastypie',
+    'pipeline',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -108,7 +109,49 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "static"),
-    '/var/www/static/',
+    os.path.join(BASE_DIR, "my_reddit/static"),
+    # '/var/www/static/',
 )
+
+STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'pipeline.finders.PipelineFinder',
+)
+
+PIPELINE_CSS = {
+    'css': {
+        'source_filenames': (
+          'css/style.css',
+        ),
+        'output_filename': 'css/stylesheet.css',
+    },
+}
+
+PIPELINE_JS = {
+  'templates': {
+    'source_filenames': (
+        'js/templates/**/*.jst',
+    ),
+    'output_filename': 'js/backbone-templates.js'
+  },
+  'other_backbone': {
+    'source_filenames': (
+        'js/jquery-214-min.js',
+        'js/underscore-min.js',
+        'js/backbone-min.js',
+        'js/backbone-tastypie.js',
+        'js/my_reddit.js',
+        'js/models/*.js',
+        'js/collections/*.js',
+        'js/views/*.js',
+        'js/routers/*.js',
+    ),
+    'output_filename': 'js/backbone-app.js'
+  }
+}

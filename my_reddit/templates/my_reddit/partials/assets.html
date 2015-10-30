@@ -1,18 +1,24 @@
-{% load staticfiles %}
-
-<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+<!-- {% load staticfiles %} -->
+{% load pipeline %}
+<!-- <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" /> -->
 <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,700' rel='stylesheet' type='text/css'>
-<script src="{% static 'js/underscore-min.js' %}"></script>
-<script src="{% static 'js/jquery-214-min.js' %}"></script>
-<script src="{% static 'js/backbone-min.js' %}"></script>
-<script src="{% static 'js/backbone-tastypie.js' %}"></script>
-<script src="{% static 'js/my_reddit.js' %}"></script>
+<!-- <script src="{% static 'js/underscore-min.js' %}"></script> -->
+<!-- <script src="{% static 'js/jquery-214-min.js' %}"></script> -->
+<!-- <script src="{% static 'js/backbone-min.js' %}"></script> -->
+<!-- <script src="{% static 'js/backbone-tastypie.js' %}"></script> -->
+
+{% stylesheet 'css' %}
+{% javascript 'templates' %}
+{% javascript 'other_backbone' %}
+<!-- <script src="{% static 'js/my_reddit.js' %}"></script>
 <script src="{% static 'js/models/sub.js' %}"></script>
 <script src="{% static 'js/models/post.js' %}"></script>
 <script src="{% static 'js/models/comment.js' %}"></script>
 <script src="{% static 'js/collections/subs.js' %}"></script>
 <script src="{% static 'js/collections/posts.js' %}"></script>
 <script src="{% static 'js/collections/comments.js' %}"></script>
+<script src="{% static 'js/views/subs_index.js' %}"></script>
+<script src="{% static 'js/routers/router.js' %}"></script> -->
 
 <script>
   $(document).ready(function(){

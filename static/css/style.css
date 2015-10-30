@@ -1,0 +1,132 @@
+html, body, h1, h2, ul, li, button, a, p, form  {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  outline: 0;
+
+  box-sizing: inherit;
+  font: inherit;
+  color: inherit;
+  text-align: inherit;
+  text-decoration: inherit;
+  background: transparent;
+}
+
+ul {
+  list-style: none;
+}
+
+ul ul {
+  padding-left: 35px;
+  clear: both;
+}
+
+body {
+  background: #1C1F24;
+  font-family: "Roboto", sans-serif;
+  color: #fff;
+  padding: 20px;
+}
+
+h1 {
+  font-size: 36px;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+a {
+  color: #f50;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.group:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.left {
+  float: left;
+}
+
+.main-list-item {
+  border: 1px solid #f50;
+  border-top: none;
+  padding: 10px;
+  position: relative;
+}
+
+.main-list-item .list-content {
+  position: absolute;
+  margin-left: 50px;
+  top: 50%;
+  transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+}
+
+.list-content > .list-content-title {
+  font-size: 24px;
+}
+
+.main-list > li:first-child {
+  border-top: 1px solid #f50;
+}
+
+.main-list {
+  margin: 10px 0;
+}
+
+.vote-form > button {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.vote-form.downvote > button {
+  transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+}
+
+.vote-form > button:hover {
+  color: #f50;
+}
+
+.vote-buttons {
+  text-align: center;
+}
+
+/* Comment Styles */
+
+.comment-separator {
+  clear: both;
+}
+
+.comment-content {
+  margin-left: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .4;
+}
+
+.comment-content .comment-text {
+  font-size: 14px;
+  font-weight: 300;
+  margin: 10px 0;
+}
+
+.comment-item {
+  padding: 5px;
+  overflow: hidden;
+}
+
+.comment-item button {
+  font-size: 16px;
+}

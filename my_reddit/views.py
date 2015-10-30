@@ -8,7 +8,7 @@ from django.db.models import Prefetch
 class IndexView(generic.ListView):
 
     def get(self, request):
-        template_name = 'my_reddit/index.html'
+        template_name = 'my_reddit/base.html'
         subs_list = Sub.objects.order_by('name')
 
         return render(request, template_name, { 'subs_list': subs_list })
