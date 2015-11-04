@@ -23,6 +23,7 @@
 - jQuery
 - Underscore
 - TastyPie (RESTful APIs)
+- django-pipeline
 
 ## Minimum Viable Product
 
