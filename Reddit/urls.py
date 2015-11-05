@@ -24,7 +24,7 @@ v1_api.register(PostResource())
 v1_api.register(CommentResource())
 
 urlpatterns = [
-    url(r'^r/', include('my_reddit.urls', namespace='my_reddit')),
+    url(r'^$', include('my_reddit.urls', namespace='my_reddit')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api/', include(v1_api.urls)),
 ]

@@ -1,0 +1,22 @@
+<h1><%= sub.escape("name") %></h1>
+<a href="#/r/<%= sub.id %>/new %>">Create New Post</a>
+<ul class="main-list">
+  <% sub.posts().each(function (post) { %>
+      <li class="main-list-item vote-item group">
+        <div class="vote-buttons left">
+          <form class="vote-form" action="" method="post">
+
+            <button type="submit" name="button">&#x25B2;</button>
+          </form>
+          <span><%= post.escape("vote_count") %></span>
+          <form class="vote-form downvote" action="" method="post">
+
+            <button type="submit" name="button">&#x25B2;</button>
+          </form>
+        </div>
+        <div class="list-content">
+          <a href="#/r/<%= sub.id %>/<%= post.id %>" class="list-content-title"><%= post.escape("title") %></a><br> submitted by <%= post.escape("author") %>
+        </div>
+      </li>
+  <% }); %>
+</ul>
